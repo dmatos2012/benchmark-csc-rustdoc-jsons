@@ -10,7 +10,7 @@ const LINTS: &[&str] = &[
     "broken_rustdoc",
 ];
 
-const CSC_ROOT_PATH: &str = "/home/david/oss/cargo-semver-checks/";
+const CSC_ROOT_PATH: &str = "../cargo-semver-checks/";
 
 fn bench_read_rustdocs(c: &mut Criterion) {
     let mut group = c.benchmark_group("ReadRustDoc");

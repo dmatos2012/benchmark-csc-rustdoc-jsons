@@ -64,7 +64,7 @@ pub fn serde_read_rustdoc(file_data: &str) -> anyhow::Result<VersionedCrate> {
 mod tests {
     use super::*;
     use std::path::Path;
-    const CSC_ROOT_PATH: &str = "/home/david/oss/cargo-semver-checks/";
+    const CSC_ROOT_PATH: &str = "../cargo-semver-checks/";
 
     #[test]
     fn test_serde_read_rustdocs() {
