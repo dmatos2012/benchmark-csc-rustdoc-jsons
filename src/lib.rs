@@ -64,17 +64,26 @@ pub fn serde_read_rustdoc(file_data: &str) -> anyhow::Result<VersionedCrate> {
 mod tests {
     use super::*;
     use std::path::Path;
+    const CSC_ROOT_PATH: &str = "/home/david/oss/cargo-semver-checks/";
 
     #[test]
     fn test_serde_read_rustdocs() {
-        let path = Path::new("/home/david/oss/cargo-semver-checks/localdata/test_data/trait_newly_sealed/old/rustdoc.json");
+        let full_path = format!(
+            "{}/localdata/test_data/trait_newly_sealed/old/rustdoc.json",
+            CSC_ROOT_PATH
+        );
+        let path = Path::new(full_path.as_str());
         let file_data = std::fs::read_to_string(path).unwrap();
         assert!(serde_read_rustdoc(&file_data).is_ok());
     }
 
     #[test]
     fn test_simd_read_rustdocs() {
-        let path = Path::new("/home/david/oss/cargo-semver-checks/localdata/test_data/trait_newly_sealed/old/rustdoc.json");
+        let full_path = format!(
+            "{}/localdata/test_data/trait_newly_sealed/old/rustdoc.json",
+            CSC_ROOT_PATH
+        );
+        let path = Path::new(full_path.as_str());
         let mut file_data = std::fs::read(path).unwrap();
         assert!(simd_read_rustdoc(&mut file_data).is_ok());
     }

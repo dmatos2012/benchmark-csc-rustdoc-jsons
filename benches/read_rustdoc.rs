@@ -10,11 +10,17 @@ const LINTS: &[&str] = &[
     "broken_rustdoc",
 ];
 
+const CSC_ROOT_PATH: &str = "/home/david/oss/cargo-semver-checks/";
+
 fn bench_read_rustdocs(c: &mut Criterion) {
     let mut group = c.benchmark_group("ReadRustDoc");
     for p in LINTS.into_iter() {
-        let full_path =
-            format!("/home/david/oss/cargo-semver-checks/localdata/test_data/{p}/old/rustdoc.json");
+        let full_path = format!(
+            "{}/localdata/test_data/{}/old/rustdoc.json",
+            CSC_ROOT_PATH, p
+        );
+        //let full_path =
+        //    format!("/home/david/oss/cargo-semver-checks/localdata/test_data/{p}/old/rustdoc.json");
         let file_data = std::fs::read(full_path.clone()).expect("Failed to read file");
         let file_data_string =
             std::fs::read_to_string(full_path.clone()).expect("Failed to read file");
