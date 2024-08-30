@@ -2,7 +2,9 @@
 This assumes you are coming from `cargo-semver-checks` , so you can find all the local data in the folder: `{csc_root_path}/localdata/test_data/{lint_name}/{old,new}/rustdoc.json` by running the script `./scripts/regenerate_test_rustdocs.sh` in that repo.
 
 ## Prerequisite
-Just change my hardcoded path `CSC_ROOT_PATH` to yours.
+* Just change my hardcoded path `CSC_ROOT_PATH` to yours.
+* Have the `localdata` in the specified folder from above
+
 
 ## Adding files
 To add files, just add them to the `LINTS`  with `lint_name`

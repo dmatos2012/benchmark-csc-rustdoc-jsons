@@ -19,8 +19,6 @@ fn bench_read_rustdocs(c: &mut Criterion) {
             "{}/localdata/test_data/{}/old/rustdoc.json",
             CSC_ROOT_PATH, p
         );
-        //let full_path =
-        //    format!("/home/david/oss/cargo-semver-checks/localdata/test_data/{p}/old/rustdoc.json");
         let file_data = std::fs::read(full_path.clone()).expect("Failed to read file");
         let file_data_string =
             std::fs::read_to_string(full_path.clone()).expect("Failed to read file");
