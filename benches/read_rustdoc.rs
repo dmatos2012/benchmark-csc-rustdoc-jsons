@@ -1,4 +1,5 @@
 use benchmark_json::{serde_read_rustdoc, simd_read_rustdoc};
+use core::str;
 use criterion::{criterion_group, criterion_main};
 use criterion::{BatchSize, BenchmarkId, Criterion};
 use std::hint::black_box;
@@ -132,7 +133,11 @@ fn bench_read_rustdocs(c: &mut Criterion) {
         group.bench_with_input(BenchmarkId::new("SERDE", "parse"), &file_data, |b, data| {
             b.iter_batched(
                 || (data.clone()),
-                |data| black_box(serde_read_rustdoc(black_box(&data))),
+                |data| {
+                    black_box(serde_read_rustdoc(black_box(
+                        str::from_utf8(black_box(&data)).unwrap(),
+                    )))
+                },
                 BatchSize::SmallInput,
             )
         });

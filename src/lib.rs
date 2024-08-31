@@ -9,15 +9,15 @@ struct RustdocFormatVersion {
     format_version: u32,
 }
 
-fn parse_or_report_error<T>(file_data: &[u8]) -> anyhow::Result<T>
+fn parse_or_report_error<T>(file_data: &str) -> anyhow::Result<T>
 where
     T: for<'a> Deserialize<'a>,
 {
-    serde_json::from_slice(file_data).with_context(|| "Unexpected parse error for file")
+    serde_json::from_str(file_data).with_context(|| "Unexpected parse error for file")
 }
 
-fn detect_rustdoc_format_version(file_data: &[u8]) -> anyhow::Result<u32> {
-    let versioned_crate = serde_json::from_slice::<RustdocFormatVersion>(file_data)
+fn detect_rustdoc_format_version(file_data: &str) -> anyhow::Result<u32> {
+    let versioned_crate = serde_json::from_str::<RustdocFormatVersion>(file_data)
         .with_context(|| "unrecognized rustdoc format for file")?;
     Ok(versioned_crate.format_version)
 }
@@ -49,7 +49,7 @@ pub fn simd_read_rustdoc(file_data: &mut [u8]) -> anyhow::Result<VersionedCrate>
     }
 }
 
-pub fn serde_read_rustdoc(file_data: &[u8]) -> anyhow::Result<VersionedCrate> {
+pub fn serde_read_rustdoc(file_data: &str) -> anyhow::Result<VersionedCrate> {
     let format_version = detect_rustdoc_format_version(file_data)?;
     match format_version {
         28 => Ok(VersionedCrate::V28(parse_or_report_error(file_data)?)),
@@ -73,7 +73,7 @@ mod tests {
             CSC_ROOT_PATH
         );
         let path = Path::new(full_path.as_str());
-        let file_data = std::fs::read(path).unwrap();
+        let file_data = std::fs::read_to_string(path).unwrap();
         assert!(serde_read_rustdoc(&file_data).is_ok());
     }
 
