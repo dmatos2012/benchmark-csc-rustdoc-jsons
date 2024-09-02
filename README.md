@@ -15,7 +15,7 @@ Read the nice issue description from [csc](https://github.com/obi1kenobi/cargo-s
 mkdir -p <whatever_name>/old
 cp aws_sdk_ec2.json <whatever_name>/old/rustdoc.json
 ```
-Add it to the `LINTS` with `<whatever_name>` and should pick it up. 
+Add it to the `TEST_CRATES` with `<whatever_name>` and should pick it up. 
 > NOTE: Its about ~500MB so it will take a long time to benchmark, so maybe only add it at the end.
 
 ## Benchmark

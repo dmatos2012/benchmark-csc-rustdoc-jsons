@@ -4,7 +4,7 @@ use criterion::{criterion_group, criterion_main};
 use criterion::{BatchSize, BenchmarkId, Criterion};
 use std::hint::black_box;
 
-const LINTS: &[&str] = &[
+const TEST_CRATES: &[&str] = &[
     "async_impl_future_equivalence",
     "auto_trait_impl_removed",
     "broken_rustdoc",
@@ -111,7 +111,7 @@ const LINTS: &[&str] = &[
 const CSC_ROOT_PATH: &str = "../cargo-semver-checks/";
 
 fn bench_read_rustdocs(c: &mut Criterion) {
-    for p in LINTS {
+    for p in TEST_CRATES {
         let mut group = c.benchmark_group(*p);
 
         let full_path = format!(
